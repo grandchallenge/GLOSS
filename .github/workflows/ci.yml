@@ -19,6 +19,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: leanprover/lean-action@v1
+      - name: Build pinned Lean scaffold
+        uses: leanprover/lean-action@v1
         with:
           lake-package-directory: scaffold
+          auto-config: false
+          build: true
+          test: false
+          lint: false
+          use-mathlib-cache: false
