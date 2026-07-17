@@ -26,9 +26,9 @@ structure Rendering where
 
 /-- Fail closed until WP3 implements total canonical rendering over the supported IR. -/
 def canonical (ir : Gloss.SemanticIR) : Rendering := {
-  text := s!"[unsupported canonical rendering for {ir.declarationName}]"
+  text := "[unsupported canonical rendering for " ++ ir.declarationName.toString ++ "]"
   clauses := #[]
-  loss := { unrendered := ir.nodes.map (·.id) }
+  loss := { unrendered := ir.nodes.map (fun node => node.id) }
   diagnostics := #[{
     code := "E300_UNIMPLEMENTED_CANONICAL_RENDERER"
     message := "Canonical rendering is not implemented; all nodes are marked unrendered."
