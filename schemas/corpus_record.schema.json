@@ -4,15 +4,52 @@
   "title": "GLOSS CorpusRecord",
   "type": "object",
   "additionalProperties": false,
-  "required": ["record_id", "layer", "source", "artifacts", "provenance", "split"],
+  "required": [
+    "record_id",
+    "layer",
+    "source",
+    "artifacts",
+    "provenance",
+    "split"
+  ],
   "properties": {
-    "record_id": {"type": "string"},
-    "layer": {"enum": ["raw-formal", "extracted-ir", "deterministic-renderings", "human-annotations", "synthetic-renderings", "backtranslations", "benchmark"]},
-    "source": {"type": "object"},
-    "artifacts": {"type": "array", "items": {"type": "object"}},
-    "provenance": {"type": "object"},
-    "split": {"type": "string"},
-    "contamination_group": {"type": ["string", "null"]},
-    "license": {"type": "object"}
+    "record_id": {
+      "type": "string"
+    },
+    "layer": {
+      "enum": [
+        "raw-formal",
+        "extracted-ir",
+        "deterministic-renderings",
+        "human-annotations",
+        "synthetic-renderings",
+        "backtranslations",
+        "benchmark"
+      ]
+    },
+    "source": {
+      "type": "object"
+    },
+    "artifacts": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "provenance": {
+      "type": "object"
+    },
+    "split": {
+      "type": "string"
+    },
+    "contamination_group": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "license": {
+      "type": "object"
+    }
   }
 }

@@ -4,26 +4,68 @@
   "title": "GLOSS ProofTrace",
   "type": "object",
   "additionalProperties": false,
-  "required": ["schema_version", "declaration", "steps"],
+  "required": [
+    "schema_version",
+    "declaration",
+    "steps"
+  ],
   "properties": {
-    "schema_version": {"type": "string"},
-    "declaration": {"type": "string"},
-    "toolchain": {"type": "object"},
+    "schema_version": {
+      "type": "string"
+    },
+    "declaration": {
+      "type": "string"
+    },
+    "toolchain": {
+      "type": "object"
+    },
     "steps": {
       "type": "array",
       "items": {
         "type": "object",
         "additionalProperties": false,
-        "required": ["index", "tactic", "before", "after", "delta"],
+        "required": [
+          "index",
+          "tactic",
+          "before",
+          "after",
+          "delta"
+        ],
         "properties": {
-          "index": {"type": "integer", "minimum": 0},
-          "tactic": {"type": "string"},
-          "source_span": {"type": ["object", "null"]},
-          "before": {"type": "object"},
-          "after": {"type": "object"},
-          "delta": {"type": "object"},
-          "narrations": {"type": "array", "items": {"type": "object"}},
-          "warnings": {"type": "array", "items": {"type": "object"}}
+          "index": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "tactic": {
+            "type": "string"
+          },
+          "source_span": {
+            "type": [
+              "object",
+              "null"
+            ]
+          },
+          "before": {
+            "type": "object"
+          },
+          "after": {
+            "type": "object"
+          },
+          "delta": {
+            "type": "object"
+          },
+          "narrations": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          },
+          "warnings": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          }
         }
       }
     }
