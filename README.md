@@ -1,4 +1,4 @@
-# IDEATION ATTRIBUTION 
+# Ideation Attribution 
 
 @nor from Eleuther Discord came up with the base idea and design. 
 
