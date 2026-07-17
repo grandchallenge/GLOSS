@@ -36,6 +36,11 @@ jobs:
             lake --version
           } 2>&1 | tee lean-setup.log
           echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+      - name: Restore Lake workspace
+        uses: actions/cache/restore@v5
+        with:
+          path: scaffold/.lake
+          key: gloss-lean-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('scaffold/lean-toolchain', 'scaffold/lakefile.toml') }}
       - name: Resolve and build Lean scaffold
         working-directory: scaffold
         shell: bash
@@ -56,3 +61,9 @@ jobs:
             lean-setup.log
             lean-build.log
           if-no-files-found: warn
+      - name: Save Lake workspace
+        if: always()
+        uses: actions/cache/save@v5
+        with:
+          path: scaffold/.lake
+          key: gloss-lean-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('scaffold/lean-toolchain', 'scaffold/lakefile.toml') }}
