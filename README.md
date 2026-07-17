@@ -1,3 +1,7 @@
+# IDEATION ATTRIBUTION 
+
+@nor from Eleuther Discord came up with the base idea and design. 
+
 # GLOSS Codex Implementation Package
 
 **Version:** 1.0.0  
