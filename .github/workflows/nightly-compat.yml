@@ -1,0 +1,17 @@
+name: nightly-compatibility
+on:
+  schedule:
+    - cron: '31 6 * * 1'
+  workflow_dispatch:
+
+jobs:
+  forward-compatibility:
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    steps:
+      - uses: actions/checkout@v4
+      - name: Explain compatibility lane
+        run: |
+          echo "This non-gating lane should replace scaffold/lean-toolchain and mathlib rev"
+          echo "with the selected release candidate, then execute lake update && lake build."
+          echo "Do not silently rewrite committed stable pins."

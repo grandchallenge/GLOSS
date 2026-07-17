@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://gcl.example/gloss/experiment_manifest.schema.json",
+  "title": "GLOSS ExperimentManifest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["run_id", "started_at", "git", "toolchain", "command", "datasets", "outputs", "status"],
+  "properties": {
+    "run_id": {"type": "string"},
+    "started_at": {"type": "string"},
+    "completed_at": {"type": ["string", "null"]},
+    "git": {"type": "object"},
+    "toolchain": {"type": "object"},
+    "command": {"type": "array", "items": {"type": "string"}},
+    "environment": {"type": "object"},
+    "seeds": {"type": "array", "items": {"type": "integer"}},
+    "datasets": {"type": "array", "items": {"type": "object"}},
+    "model": {"type": ["object", "null"]},
+    "outputs": {"type": "array", "items": {"type": "object"}},
+    "status": {"enum": ["running", "success", "failed", "cancelled"]}
+  }
+}

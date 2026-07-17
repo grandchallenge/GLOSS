@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://gcl.example/gloss/agent_review.schema.json",
+  "title": "GLOSS AgentReview",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "artifact_id",
+    "artifact_type",
+    "reviews",
+    "unresolved_obligations",
+    "status"
+  ],
+  "properties": {
+    "artifact_id": {"type": "string"},
+    "artifact_type": {"type": "string"},
+    "work_package": {"type": ["string", "null"]},
+    "reviews": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["role", "reviewer", "decision", "date"],
+        "properties": {
+          "role": {"type": "string"},
+          "reviewer": {"type": "string"},
+          "decision": {"enum": ["approved", "approved_with_obligations", "changes_requested", "abstained"]},
+          "date": {"type": "string", "format": "date"},
+          "evidence": {"type": "array", "items": {"type": "string"}},
+          "notes": {"type": "string"}
+        }
+      }
+    },
+    "unresolved_obligations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "severity", "description", "owner", "status"],
+        "properties": {
+          "id": {"type": "string"},
+          "severity": {"enum": ["critical", "high", "medium", "low"]},
+          "description": {"type": "string"},
+          "owner": {"type": "string"},
+          "status": {"enum": ["open", "accepted", "closed"]},
+          "due_release": {"type": ["string", "null"]}
+        }
+      }
+    },
+    "status": {"enum": ["draft", "reviewing", "approved", "blocked", "superseded"]}
+  }
+}

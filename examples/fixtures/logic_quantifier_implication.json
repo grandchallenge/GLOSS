@@ -1,0 +1,33 @@
+{
+  "fixture_id": "logic.quantifier_implication.001",
+  "lean": {
+    "module": "GlossExamples.Core",
+    "source": "theorem sample (α : Type) (P Q : α → Prop) : (∀ x, P x → Q x) → ∀ x, P x → Q x := by intro h x hx; exact h x hx",
+    "declaration": "sample"
+  },
+  "expectations": {
+    "critical_features": [
+      "universal_quantifier",
+      "implication",
+      "dependent_binder_scope"
+    ],
+    "canonical_text": "Let alpha be a type. Let P and Q be predicates on alpha. Assume that, for every x, if P holds of x, then Q holds of x. Then, for every x, if P holds of x, then Q holds of x.",
+    "allowed_status": [
+      "exact_structural"
+    ],
+    "forbidden_mutations": [
+      "swap_forall_exists",
+      "reverse_implication",
+      "drop_hypothesis"
+    ]
+  },
+  "tags": [
+    "L1",
+    "logic",
+    "scope"
+  ],
+  "provenance": {
+    "author": "GCL",
+    "date": "2026-07-16"
+  }
+}

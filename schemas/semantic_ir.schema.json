@@ -1,0 +1,519 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://gcl.example/gloss/semantic_ir.schema.json",
+  "title": "GLOSS SemanticIR",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "normalization_profile",
+    "toolchain",
+    "source",
+    "declaration",
+    "root_node",
+    "nodes",
+    "binders",
+    "symbols",
+    "normalization",
+    "warnings"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "pattern": "^1\\.[0-9]+\\.[0-9]+$"
+    },
+    "normalization_profile": {
+      "type": "string"
+    },
+    "toolchain": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "lean_version",
+        "project_commit",
+        "extractor_commit"
+      ],
+      "properties": {
+        "lean_version": {
+          "type": "string"
+        },
+        "mathlib_version": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "project_commit": {
+          "type": "string"
+        },
+        "extractor_commit": {
+          "type": "string"
+        }
+      }
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "module",
+        "declaration_name",
+        "source_hash"
+      ],
+      "properties": {
+        "repository": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "commit": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "file": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "module": {
+          "type": "string"
+        },
+        "declaration_name": {
+          "type": "string"
+        },
+        "source_hash": {
+          "type": "string"
+        }
+      }
+    },
+    "declaration": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "name",
+        "type_node"
+      ],
+      "properties": {
+        "kind": {
+          "enum": [
+            "theorem",
+            "lemma",
+            "definition",
+            "axiom",
+            "opaque",
+            "structure",
+            "class",
+            "instance",
+            "inductive",
+            "example",
+            "other"
+          ]
+        },
+        "name": {
+          "type": "string"
+        },
+        "type_node": {
+          "type": "string"
+        },
+        "value_node": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "attributes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "docstring": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "root_node": {
+      "type": "string"
+    },
+    "nodes": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/node"
+      }
+    },
+    "binders": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/binder"
+      }
+    },
+    "symbols": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/symbol"
+      }
+    },
+    "spans": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/span"
+      }
+    },
+    "normalization": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/norm"
+      }
+    },
+    "warnings": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/diagnostic"
+      }
+    },
+    "proof_trace_ref": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  },
+  "$defs": {
+    "node": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "kind",
+        "children",
+        "importance"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^n_[A-Za-z0-9_-]+$"
+        },
+        "kind": {
+          "enum": [
+            "sort",
+            "constant",
+            "variable",
+            "literal",
+            "application",
+            "lambda",
+            "forall",
+            "exists",
+            "let",
+            "match",
+            "implication",
+            "iff",
+            "and",
+            "or",
+            "not",
+            "equality",
+            "relation",
+            "membership",
+            "subset",
+            "tuple",
+            "structure",
+            "projection",
+            "constructor",
+            "coercion",
+            "type_ascription",
+            "annotation",
+            "opaque_lean_expr"
+          ]
+        },
+        "children": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "type_node": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "head_symbol": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "binder_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "span_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "importance": {
+          "enum": [
+            "critical",
+            "material",
+            "presentational",
+            "implementation"
+          ]
+        },
+        "payload": {
+          "type": "object"
+        }
+      }
+    },
+    "binder": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "display_name",
+        "binder_kind",
+        "type_node",
+        "dependency_ids",
+        "semantic_role"
+      ],
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "display_name": {
+          "type": "string"
+        },
+        "original_name": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "binder_kind": {
+          "enum": [
+            "explicit",
+            "implicit",
+            "strict_implicit",
+            "instance",
+            "pattern",
+            "generated"
+          ]
+        },
+        "type_node": {
+          "type": "string"
+        },
+        "dependency_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "scope_node": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "semantic_role": {
+          "enum": [
+            "type_parameter",
+            "structure_assumption",
+            "term_variable",
+            "hypothesis",
+            "index",
+            "proof_irrelevant_argument",
+            "unknown"
+          ]
+        },
+        "span_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "implicitness_reason": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "symbol": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "qualified_name",
+        "kind"
+      ],
+      "properties": {
+        "qualified_name": {
+          "type": "string"
+        },
+        "short_name": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "kind": {
+          "type": "string"
+        },
+        "module": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "type_fingerprint": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "notation_candidates": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "rule_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "span": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "provenance",
+        "confidence"
+      ],
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "file": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "start_byte": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "end_byte": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "provenance": {
+          "enum": [
+            "original",
+            "synthetic",
+            "inferred",
+            "reconstructed",
+            "absent"
+          ]
+        },
+        "confidence": {
+          "enum": [
+            "exact",
+            "containing",
+            "nearest_ancestor",
+            "absent"
+          ]
+        }
+      }
+    },
+    "norm": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "rule_id",
+        "before_nodes",
+        "after_nodes",
+        "justification"
+      ],
+      "properties": {
+        "rule_id": {
+          "type": "string"
+        },
+        "before_nodes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "after_nodes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "justification": {
+          "enum": [
+            "definitional",
+            "theorem",
+            "presentational"
+          ]
+        }
+      }
+    },
+    "diagnostic": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "code",
+        "severity",
+        "message"
+      ],
+      "properties": {
+        "code": {
+          "type": "string"
+        },
+        "severity": {
+          "enum": [
+            "info",
+            "warning",
+            "error"
+          ]
+        },
+        "message": {
+          "type": "string"
+        },
+        "node_id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "span_id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    }
+  }
+}

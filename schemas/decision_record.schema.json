@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://gcl.example/gloss/decision_record.schema.json",
+  "title": "GLOSS DecisionRecord",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id", "title", "status", "date", "decision", "consequences"],
+  "properties": {
+    "id": {"type": "string"},
+    "title": {"type": "string"},
+    "status": {"enum": ["proposed", "accepted", "deprecated", "superseded", "rejected"]},
+    "date": {"type": "string", "format": "date"},
+    "context": {"type": "string"},
+    "decision": {"type": "string"},
+    "consequences": {"type": "array", "items": {"type": "string"}},
+    "supersedes": {"type": ["string", "null"]}
+  }
+}

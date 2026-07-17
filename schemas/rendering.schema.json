@@ -1,0 +1,221 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://gcl.example/gloss/rendering.schema.json",
+  "title": "GLOSS RenderingArtifact",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "ir_hash",
+    "mode",
+    "renderer",
+    "text",
+    "clauses",
+    "loss",
+    "faithfulness_status",
+    "warnings"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "string"
+    },
+    "ir_hash": {
+      "type": "string"
+    },
+    "mode": {
+      "enum": [
+        "canonical",
+        "spoken",
+        "mathematical",
+        "pedagogical",
+        "summary",
+        "trace-operational",
+        "trace-logical",
+        "trace-mathematical"
+      ]
+    },
+    "renderer": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "version"
+      ],
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        },
+        "model": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "rule_registry_hash": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "text": {
+      "type": "string"
+    },
+    "speech": {
+      "type": [
+        "object",
+        "null"
+      ]
+    },
+    "clauses": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "text",
+          "node_ids",
+          "kind"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "text": {
+            "type": "string"
+          },
+          "node_ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "kind": {
+            "enum": [
+              "formal",
+              "discourse_connector",
+              "definition_expansion",
+              "background_fact",
+              "example",
+              "motivation",
+              "model_inference"
+            ]
+          },
+          "confidence": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "minimum": 0,
+            "maximum": 1
+          }
+        }
+      }
+    },
+    "loss": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "covered",
+        "compressed",
+        "elided",
+        "unrendered",
+        "exact_coverage",
+        "effective_coverage"
+      ],
+      "properties": {
+        "covered": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "compressed": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/lossEntry"
+          }
+        },
+        "elided": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/lossEntry"
+          }
+        },
+        "unrendered": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/lossEntry"
+          }
+        },
+        "exact_coverage": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "effective_coverage": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        }
+      }
+    },
+    "faithfulness_status": {
+      "enum": [
+        "exact_structural",
+        "equivalent_conventional",
+        "loss_accounted",
+        "partial",
+        "unsafe_unverified"
+      ]
+    },
+    "disagreements": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "warnings": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "provenance": {
+      "type": "object"
+    }
+  },
+  "$defs": {
+    "lossEntry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "node_id",
+        "reason_code",
+        "reason"
+      ],
+      "properties": {
+        "node_id": {
+          "type": "string"
+        },
+        "reason_code": {
+          "type": "string"
+        },
+        "reason": {
+          "type": "string"
+        },
+        "rule_id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    }
+  }
+}
