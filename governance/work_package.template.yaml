@@ -1,0 +1,33 @@
+schema_version: 1.0.0
+id: WPXX
+name: Work Package Name
+version: 0.1.0
+status: proposed
+objective: >-
+  State the measurable outcome rather than a broad activity.
+owner: null
+agents:
+  required: [Cartographer, Mechanist, Verifier]
+  consulted: [Axiomatist, Grammarian, Amanuensis]
+dependencies: []
+inputs: []
+deliverables:
+  - id: D1
+    path: null
+    description: null
+acceptance_criteria:
+  - id: AC-001
+    statement: null
+    verification_command: null
+    evidence_path: null
+non_goals: []
+risks: []
+observability:
+  metrics: []
+  logs: []
+  artifacts: []
+review_file: governance/reviews/WPXX.agent_review.yaml
+completion:
+  commit: null
+  date: null
+  unresolved_obligations: []

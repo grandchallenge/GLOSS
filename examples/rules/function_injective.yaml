@@ -1,0 +1,30 @@
+rule_id: logic.function_injective
+version: 1.0.0
+status: candidate
+class: construct
+match:
+  head: Function.Injective
+  node_kind: application
+  type_constraints: []
+  slots: [function]
+  preconditions: []
+renderings:
+  canonical: "{function} is injective"
+  spoken: "{function} is one-to-one"
+loss_policy:
+  classification: exact
+  covered_slots: [function]
+  compressed_slots: []
+  elided_slots: []
+fixtures:
+  positive: [injective_basic, injective_dependent]
+  negative: [surjective_basic, left_cancel_without_function]
+provenance:
+  proposer: rule-prospector
+  evidence: ["Mathlib construct identity"]
+  corpus_build: null
+compatibility:
+  lean_min: v4.32.0
+  lean_max: v4.32.x
+review: []
+replacement_rule_id: null

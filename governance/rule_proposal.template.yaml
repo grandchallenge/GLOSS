@@ -1,0 +1,27 @@
+schema_version: 1.0.0
+proposal_id: RP-0001
+rule_id: domain.construct.v1
+proposer: null
+date: 2026-07-16
+motivation: null
+match_summary: null
+semantic_preconditions: []
+renderings:
+  canonical: null
+  spoken: null
+  mathematical: null
+loss_classification: exact
+positive_fixtures: []
+negative_fixtures: []
+mutation_tests: []
+corpus_evidence: []
+compatibility:
+  lean: v4.32.0
+  mathlib: v4.32.0
+review_requirements:
+  - Formalist
+  - Grammarian
+  - Adversary
+  - Verifier
+status: proposed
+replacement_of: null

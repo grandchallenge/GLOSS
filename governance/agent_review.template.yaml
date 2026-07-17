@@ -1,0 +1,36 @@
+schema_version: 1.0.0
+artifact_id: GLOSS-WPXX-ARTIFACT
+artifact_version: 0.0.0
+artifact_type: specification
+work_package: WPXX
+status: draft
+reviews:
+  - agent: Axiomatist
+    reviewer: null
+    disposition: pending
+    obligations:
+      - id: OBL-001
+        severity: blocking
+        description: Confirm that the artifact preserves the formal trust boundary.
+        owner: null
+        status: open
+        evidence: []
+  - agent: Cartographer
+    reviewer: null
+    disposition: pending
+    obligations: []
+  - agent: Grammarian
+    reviewer: null
+    disposition: pending
+    obligations: []
+  - agent: Verifier
+    reviewer: null
+    disposition: pending
+    obligations: []
+release_gate:
+  blockers_open: true
+  accepted_by: []
+  accepted_at: null
+provenance:
+  created_at: 2026-07-16
+  source_commit: null
