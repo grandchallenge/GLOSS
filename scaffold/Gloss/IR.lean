@@ -23,12 +23,12 @@ structure SourceSpan where
 structure IRNode where
   id : String
   kind : NodeKind
-  headName : Option Name := none
-  typeText : Option String := none
-  source : Option SourceSpan := none
-  children : Array String := #[]
-  binderKind : Option BinderKind := none
-  metadata : Array (String × String) := #[]
+  headName : Option Name := (none : Option Name)
+  typeText : Option String := (none : Option String)
+  source : Option SourceSpan := (none : Option SourceSpan)
+  children : Array String := (#[] : Array String)
+  binderKind : Option BinderKind := (none : Option BinderKind)
+  metadata : Array (String × String) := (#[] : Array (String × String))
   deriving Repr, Inhabited
 
 structure SemanticIR where
@@ -37,9 +37,9 @@ structure SemanticIR where
   declarationKind : String
   root : String
   nodes : Array IRNode
-  dependencies : Array (String × String) := #[]
-  diagnostics : Array Diagnostic := #[]
-  provenance : Array (String × String) := #[]
+  dependencies : Array (String × String) := (#[] : Array (String × String))
+  diagnostics : Array Diagnostic := (#[] : Array Diagnostic)
+  provenance : Array (String × String) := (#[] : Array (String × String))
   deriving Repr, Inhabited
 
 end Gloss
