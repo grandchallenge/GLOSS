@@ -29,7 +29,6 @@ structure IRNode where
   children : Array String := (#[] : Array String)
   binderKind : Option BinderKind := (none : Option BinderKind)
   metadata : Array (String × String) := (#[] : Array (String × String))
-  deriving Repr, Inhabited
 
 structure SemanticIR where
   schemaVersion : String := Gloss.schemaVersion
@@ -40,6 +39,5 @@ structure SemanticIR where
   dependencies : Array (String × String) := (#[] : Array (String × String))
   diagnostics : Array Diagnostic := (#[] : Array Diagnostic)
   provenance : Array (String × String) := (#[] : Array (String × String))
-  deriving Repr, Inhabited
 
 end Gloss
