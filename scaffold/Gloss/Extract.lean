@@ -2,7 +2,6 @@ import Lean
 import Gloss.IR
 
 namespace Gloss
-open Lean Meta Elab Command
 
 /--
 Extract a declaration into SemanticIR.
@@ -11,7 +10,9 @@ This scaffold intentionally returns `E100_UNIMPLEMENTED_EXTRACTOR`; it is not a 
 extractor. WP1 must implement environment lookup, expression traversal, source/InfoTree
 alignment, stable node identity, binder dependency analysis, and typed fallbacks.
 -/
-def extractDeclaration (env : Environment) (declName : Name) : MetaM (Except Diagnostic SemanticIR) := do
+def extractDeclaration
+    (env : Lean.Environment)
+    (declName : Lean.Name) : Lean.MetaM (Except Gloss.Diagnostic Gloss.SemanticIR) := do
   let _ := env
   pure <| .error {
     code := "E100_UNIMPLEMENTED_EXTRACTOR"
