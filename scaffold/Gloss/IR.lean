@@ -23,7 +23,7 @@ structure SourceSpan where
 structure IRNode where
   id : String
   kind : NodeKind
-  headName : Option Name := (none : Option Name)
+  headName : Option Lean.Name := (none : Option Lean.Name)
   typeText : Option String := (none : Option String)
   source : Option SourceSpan := (none : Option SourceSpan)
   children : Array String := (#[] : Array String)
@@ -32,7 +32,7 @@ structure IRNode where
 
 structure SemanticIR where
   schemaVersion : String := Gloss.schemaVersion
-  declarationName : Name
+  declarationName : Lean.Name
   declarationKind : String
   root : String
   nodes : Array IRNode
