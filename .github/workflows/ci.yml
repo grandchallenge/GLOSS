@@ -31,6 +31,7 @@ jobs:
             export PATH="$HOME/.elan/bin:$PATH"
             toolchain="$(cat scaffold/lean-toolchain)"
             elan toolchain install "$toolchain"
+            elan default "$toolchain"
             lean --version
             lake --version
           } 2>&1 | tee lean-setup.log
