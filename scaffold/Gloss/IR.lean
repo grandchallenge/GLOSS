@@ -23,23 +23,21 @@ structure SourceSpan where
 structure IRNode where
   id : String
   kind : NodeKind
-  headName : Option Name := none
-  typeText : Option String := none
-  source : Option SourceSpan := none
-  children : Array String := #[]
-  binderKind : Option BinderKind := none
-  metadata : Array (String × String) := #[]
-  deriving Repr, Inhabited
+  headName : Option Lean.Name := (none : Option Lean.Name)
+  typeText : Option String := (none : Option String)
+  source : Option SourceSpan := (none : Option SourceSpan)
+  children : Array String := (#[] : Array String)
+  binderKind : Option BinderKind := (none : Option BinderKind)
+  metadata : Array (String × String) := (#[] : Array (String × String))
 
 structure SemanticIR where
   schemaVersion : String := Gloss.schemaVersion
-  declarationName : Name
+  declarationName : Lean.Name
   declarationKind : String
   root : String
   nodes : Array IRNode
-  dependencies : Array (String × String) := #[]
-  diagnostics : Array Diagnostic := #[]
-  provenance : Array (String × String) := #[]
-  deriving Repr, Inhabited
+  dependencies : Array (String × String) := (#[] : Array (String × String))
+  diagnostics : Array Diagnostic := (#[] : Array Diagnostic)
+  provenance : Array (String × String) := (#[] : Array (String × String))
 
 end Gloss

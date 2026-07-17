@@ -19,6 +19,51 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: leanprover/lean-action@v1
+      - name: Install elan and pinned Lean toolchain
+        shell: bash
+        run: |
+          set -o pipefail
+          {
+            curl --proto '=https' --tlsv1.2 -sSf \
+              https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh \
+              -o /tmp/elan-init.sh
+            sh /tmp/elan-init.sh -y --default-toolchain none
+            export PATH="$HOME/.elan/bin:$PATH"
+            toolchain="$(cat scaffold/lean-toolchain)"
+            elan toolchain install "$toolchain"
+            elan default "$toolchain"
+            lean --version
+            lake --version
+          } 2>&1 | tee lean-setup.log
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+      - name: Restore Lake workspace
+        uses: actions/cache/restore@v5
         with:
-          lake-package-directory: scaffold
+          path: scaffold/.lake
+          key: gloss-lean-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('scaffold/lean-toolchain', 'scaffold/lakefile.toml') }}
+      - name: Resolve and build Lean scaffold
+        working-directory: scaffold
+        shell: bash
+        run: |
+          set -o pipefail
+          {
+            echo '$ lake update'
+            lake update
+            echo '$ lake build'
+            lake build
+          } 2>&1 | tee ../lean-build.log
+      - name: Upload Lean CI logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: lean-ci-logs
+          path: |
+            lean-setup.log
+            lean-build.log
+          if-no-files-found: warn
+      - name: Save Lake workspace
+        if: always()
+        uses: actions/cache/save@v5
+        with:
+          path: scaffold/.lake
+          key: gloss-lean-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('scaffold/lean-toolchain', 'scaffold/lakefile.toml') }}
