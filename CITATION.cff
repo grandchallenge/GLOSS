@@ -1,0 +1,8 @@
+cff-version: 1.2.0
+message: Cite an immutable GLOSS release and exact commit.
+title: GLOSS
+type: software
+authors:
+  - name: Grand Challenge Labs
+repository-code: https://github.com/grandchallenge/GLOSS
+license: MIT
