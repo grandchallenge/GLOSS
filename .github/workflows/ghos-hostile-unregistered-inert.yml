@@ -1,0 +1,15 @@
+name: GHOS hostile unregistered inert probe
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  inert:
+    if: ${{ false }}
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Never execute
+        run: printf '%s\n' 'inert hostile routing probe'
