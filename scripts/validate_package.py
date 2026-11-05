@@ -61,5 +61,13 @@ if errors:
     for item in errors:
         print(f"- {item}", file=sys.stderr)
     raise SystemExit(1)
+# Existing package-contracts job now executes the portable component guard.
+# No new workflow runner, no Lean trust-boundary change.
+import subprocess
+subprocess.run(
+    [sys.executable, "-m", "unittest", "discover", "-s", "tests", "-p", "test_gcl_component_routing.py", "-v"],
+    cwd=ROOT,
+    check=True,
+)
 print("PACKAGE VALIDATION PASSED")
 print(f"Validated {len(list((ROOT/'schemas').glob('*.schema.json')))} schemas and representative examples.")
