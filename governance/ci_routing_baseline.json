@@ -1,0 +1,15 @@
+{
+  "contract_id": "GCL-CIR-001",
+  "version": "1.0.0",
+  "repository": "grandchallenge/GLOSS",
+  "mode": "ENFORCE_DISCOVERY_PRESERVE_EXISTING_CI",
+  "checks": [
+    {
+      "id": "gloss-package-contracts",
+      "test_globs": [
+        "tests/test_*.py"
+      ]
+    }
+  ],
+  "legacy_test_paths": []
+}
